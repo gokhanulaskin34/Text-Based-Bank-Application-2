@@ -1,0 +1,180 @@
+#Import
+import datetime
+
+# Variables
+userahmet = "Ahmet"
+passwahmet = "1234"
+userzeynep = "Zeynep"
+passwzeynep = "4321"
+
+moneyahmet = int(1000)
+moneyzeynep = int(1000)
+
+loggedin = False
+
+# First Step - Login / Exit
+print("— Welcome to Bank (v.0.2) —\n1. Login\n2. Exit")
+sec1 = input(">>>")
+
+#Application
+def first():
+    global moneyahmet
+    global moneyzeynep
+    global username
+    global passw
+    global loggedin
+
+    # Exit
+    if sec1 != "1":
+        exit()
+    # Login
+    if loggedin == False:
+        username = input(str("Username: "))
+        passw = input(str("Password: "))
+
+    while sec1 == "1":
+
+        # Main Menu - Ahmet
+        if username == userahmet and passw == passwahmet:
+            loggedin=True
+
+            print("\nWelcome", userahmet, "!\nPlease enter the number of the service:\n1. Withdraw Money\n2. Deposit Money\n3. Transfer Money\n4. My Account Information\n5. Logout")
+            useroption = input(">>>")
+
+            # Withdraw Money
+            while useroption == "1":
+                withdraw = input("\nPlease enter the amount you want to withdraw: ")
+
+                # If there is no enough money
+                if int(withdraw) > int(moneyahmet):
+                    print("\nYou don’t have", withdraw, "TL in your account\nGoing back to main menu...\n")
+                    first()
+
+                # If there is enough money
+                else:
+                    moneyahmet = int(moneyahmet) - int(withdraw)
+                    print("\n", withdraw, "TL withdrawn from your account\nGoing back to main menu...")
+                    first()
+
+            # Drop Money
+            while useroption == "2":
+                drop = input("\nPlease enter the amount you want to drop: ")
+                print("\n", drop, "added to your account\nGoing back to main menu...")
+                moneyahmet = int(moneyahmet) + int(drop)
+                first()
+
+            # Transfer Money
+            while useroption == "3":
+                def second():
+                    global moneyahmet
+                    global moneyzeynep
+
+                    transfer = input("\nPlease enter the amount you want to transfer: ")
+
+                    # If there is no enough money
+                    if int(transfer) > int(moneyahmet):
+                        print("\nSorry! You don’t have enough money to complete this transaction")
+                        print("1. Go back to main menu\n2. Transfer again")
+                        useroption2 = input(">>>")
+
+                        if useroption2 == "1":
+                            first()
+
+                        elif useroption2 == "2":
+                            second()
+
+                    # If there is enough money
+                    else:
+                        moneyahmet = int(moneyahmet) - int(transfer)
+                        moneyzeynep = int(moneyzeynep) + int(transfer)
+                        first()
+                second()
+
+            # Account Information
+            while useroption == "4":
+                current_time = datetime.datetime.now()
+                print("\n—————————— Bank ——————————\n— ", current_time, " —\n——————————————————————————————————\nYour Name: ", userahmet, "\nYour Password: ", passwahmet, "\nYour Amount (TL): ", moneyahmet)
+                first()
+                return
+
+            # Exit
+            while useroption == "5":
+                loggedin = False
+                first()
+
+        # Main Menu - Zeynep
+        if username == userzeynep and passw == passwzeynep:
+            loggedin=True
+
+            print("\nWelcome", userzeynep, "!\nPlease enter the number of the service:\n1. Withdraw Money\n2. Deposit Money\n3. Transfer Money\n4. My Account Information\n5. Logout")
+            useroption = input(">>>")
+
+            # Withdraw Money
+            while useroption == "1":
+                withdraw = input("\nPlease enter the amount you want to withdraw: ")
+
+                # If there is no enough money
+                if int(withdraw) > int(moneyahmet):
+                    print("\nYou don’t have", withdraw, "TL in your account\nGoing back to main menu...\n")
+                    first()
+
+                # If there is enough money
+                else:
+                    moneyahmet = int(moneyahmet) - int(withdraw)
+                    print("\n", withdraw, "TL withdrawn from your account\nGoing back to main menu...")
+                    first()
+
+            # Drop Money
+            while useroption == "2":
+                drop = input("\nPlease enter the amount you want to drop: ")
+                print("\n", drop, "added to your account\nGoing back to main menu...")
+                moneyahmet = int(moneyahmet) + int(drop)
+                first()
+
+            # Transfer Money
+            while useroption == "3":
+                def second():
+                    global moneyahmet
+                    global moneyzeynep
+
+                    transfer = input("\nPlease enter the amount you want to transfer: ")
+
+                    # If there is no enough money
+                    if int(transfer) > int(moneyahmet):
+                        print("\nSorry! You don’t have enough money to complete this transaction")
+                        print("1. Go back to main menu\n2. Transfer again")
+                        useroption2 = input(">>>")
+
+                        if useroption2 == "1":
+                            first()
+
+                        elif useroption2 == "2":
+                            second()
+
+                    # If there is enough money
+                    else:
+                        moneyahmet = int(moneyahmet) - int(transfer)
+                        moneyzeynep = int(moneyzeynep) + int(transfer)
+                        first()
+
+                second()
+
+            # Account Information
+            while useroption == "4":
+                current_time = datetime.datetime.now()
+                print("\n—————————— Bank ——————————\n— ", current_time,
+                      " —\n——————————————————————————————————\nYour Name: ", userahmet, "\nYour Password: ", passwahmet,
+                      "\nYour Amount (TL): ", moneyahmet)
+                first()
+                return
+
+            # Exit
+            while useroption == "5":
+                loggedin = False
+                first()
+
+        else:
+            first()
+        return
+
+first()
